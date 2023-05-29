@@ -37,6 +37,19 @@ export const routes = [
     }
   },
   {
+    method: 'PUT',
+    path: buildRoutePath('/tasks/:id'),
+    handle: (req, res ) => {
+      const { id } = req.params
+
+      if(database.update('tasks', id, req.body)) {
+        return res.writeHead(204).end()
+      } else {
+        return res.writeHead(400).end(JSON.stringify({message: 'task does not exist'}))
+      }     
+    }
+  },
+  {
     method: 'DELETE',
     path: buildRoutePath('/tasks/:id'),
     handle: (req, res ) => {
