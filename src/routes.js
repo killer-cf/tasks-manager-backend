@@ -42,9 +42,11 @@ export const routes = [
     handle: (req, res ) => {
       const { id } = req.params
 
-      database.delete('tasks', id)
-
-      return res.writeHead(204).end()
+      if(database.delete('tasks', id)) {
+        return res.writeHead(204).end()
+      } else {
+        return res.writeHead(400).end(JSON.stringify({message: 'task does not exist'}))
+      }     
     }
   },
 ]
