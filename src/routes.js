@@ -42,10 +42,6 @@ export const routes = [
     handle: (req, res ) => {
       const { id } = req.params
 
-      if(!id) {
-        return res.writeHead(400).end(JSON.stringify({message: 'please provide a id'}))
-      }
-
       if(database.update('tasks', id, req.body)) {
         return res.writeHead(204).end()
       } else {
@@ -58,10 +54,6 @@ export const routes = [
     path: buildRoutePath('/tasks/:id'),
     handle: (req, res ) => {
       const { id } = req.params
-
-      if(!id) {
-        return res.writeHead(400).end(JSON.stringify({message: 'please provide a id'}))
-      }
 
       if(database.update('tasks', id, req.body)) {
         return res.writeHead(204).end()
@@ -76,10 +68,6 @@ export const routes = [
     handle: (req, res ) => {
       const { id } = req.params
 
-      if(!id) {
-        return res.writeHead(400).end(JSON.stringify({message: 'please provide a id'}))
-      }
-
       if(database.complete('tasks', id)) {
         return res.writeHead(204).end()
       } else {
@@ -92,10 +80,6 @@ export const routes = [
     path: buildRoutePath('/tasks/:id'),
     handle: (req, res ) => {
       const { id } = req.params
-
-      if(!id) {
-        return res.writeHead(400).end(JSON.stringify({message: 'please provide a id'}))
-      }
 
       if(database.delete('tasks', id)) {
         return res.writeHead(204).end()
