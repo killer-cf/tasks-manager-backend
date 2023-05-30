@@ -49,9 +49,29 @@ export class Database {
       const row = this.#database[table][rowIndex]
 
       this.#database[table][rowIndex] = { 
-        id,
+        ...row,
         title: data.title ? data.title : row.title,
         description: data.description ? data.description : row.description,
+        updated_at: new Date()
+      }
+      this.#persist()
+
+      return true
+    }
+
+    return false
+  }
+
+  complete(table, id) {
+    const rowIndex = this.#database[table].findIndex(row => row.id === id)
+
+    if(rowIndex > -1){
+      const row = this.#database[table][rowIndex]
+
+      this.#database[table][rowIndex] = { 
+        ...row,
+        completed_at: new Date(), 
+        updated_at: new Date()
       }
       this.#persist()
 
